@@ -1,0 +1,8 @@
+1. читаем лог, или можно по нему разные ключевые слова поискать здесь бы сработали, например auth, pass, password, login
+2. находим строки 30-38
+3. в 38 строке видим некий auth, закодированный в base64
+4. декодируем: 
+```bash
+$ echo "aWQxMTdAY3RmLmluZm9zZWMuc3BiLnJ1OlVDVEZ7MTRmNTNhMTk3ODM4YjA0OGZlODcxYjU2NDFhYWIzNzR9"|base64 -d
+id117@ctf.infosec.spb.ru:UCTF{14f53a197838b048fe871b5641aab374}
+```

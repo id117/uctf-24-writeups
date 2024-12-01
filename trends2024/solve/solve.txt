@@ -1,0 +1,18 @@
+1. разархивируем image.tar, пойме, что это докер-образ
+2. загрузим его: 
+```
+$ docker image load -i image.tar
+```
+3. проверяем образы, почвился trends2024:test
+4. посмотрим, как он был создан:
+```
+$ docker history trends2024:test
+...
+sha256:ab2fb2cf57cea8c3088e8d7a0225109d6f04122441e2e2bb288a6ed54cec4e1c   5 days ago     /bin/sh -c SECRET="VUNURntmZWUwYWNmODU3MmYxYTlhYWQ2YzZjOGI3NmM3NGZiN30K" cat /dev/urandom | head -c 256 | md5sum | head -c 32 >> /random_values.txt   192B
+...
+```
+5. декодируем SECRET 
+```
+$ echo "VUNURntmZWUwYWNmODU3MmYxYTlhYWQ2YzZjOGI3NmM3NGZiN30K"|base64 -d
+UCTF{fee0acf8572f1a9aad6c6c8b76c74fb7}
+```

@@ -1,0 +1,35 @@
+- логично, что нам нужно найти в репозитории что-то необычное, чего там быть не должно
+- для этих целей есть специальные инструменты (например, gitleaks, trufflehog), они предназначены для поиска паролей и ключей в исходниках
+- проверяем (в примере, с помощью gitleaks):
+    1. устанавливаем gitleaks:
+        wget https://github.com/gitleaks/gitleaks/releases/download/v8.21.2/gitleaks_8.21.2_linux_x64.tar.gz
+        tar -xzvf ./gitleaks_8.21.2_linux_x64.tar.gz
+    2. клонируем репу
+        git clone https://github.com/id117/linuxkernel
+    3. ./gitleaks git ./linuxkernel
+    ```
+     ~/ctf24/git  ./gitleaks -v git ./linuxkernel                                                                                                                                 ✔ │ ≡ │ pl@pentestlab 
+
+    ○
+    │╲
+    │ ○
+    ○ ░
+    ░    gitleaks
+
+    Finding:     //glpat-SNixgZ5e6NWeo1Wwga11 flag = UCTF{6240a73...
+    Secret:      glpat-SNixgZ5e6NWeo1Wwga11
+    RuleID:      gitlab-pat
+    Entropy:     4.026987
+    File:        src/assembly/assembly.c
+    Line:        2
+    Commit:      4da89b3a0072a14dc71c9294df8bd1c491b1e8bb
+    Author:      孟宁
+    Email:       mengning997@163.com
+    Date:        2024-03-18T08:19:31Z
+    Fingerprint: 4da89b3a0072a14dc71c9294df8bd1c491b1e8bb:src/assembly/assembly.c:gitlab-pat:2
+
+    3:54PM INF 145 commits scanned.
+    3:54PM INF scan completed in 17.5s
+    3:54PM WRN leaks found: 1
+    ```
+    4. переходим в найденный коммит (https://github.com/id117/linuxkernel/commit/4da89b3a0072a14dc71c9294df8bd1c491b1e8bb), находим там флаг
